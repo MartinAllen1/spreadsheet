@@ -1,0 +1,59 @@
+﻿@page "/about"
+
+<PageTitle>Home</PageTitle>
+
+<div class="container my-4">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-dark text-light">
+            <h5 class="mb-0">Authors</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">Kate Wang</li>
+                <li class="list-group-item">Martin Allen</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-light">
+            <h5 class="mb-0">Added Functionality</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Cells are hoverable and scrollable
+                </li>
+                <li class="list-group-item">
+                    Clicking on a cell highlights the cell
+                </li>
+                <li class="list-group-item">
+                    You can navigate the spreadsheet using arrow keys
+                </li>
+                <li class="list-group-item">
+                    You can delete cell contents using the Escape key
+                </li>
+                <li class="list-group-item">
+                    Your location in the spreadsheet is preserved upon refresh
+                </li>
+                <li class="list-group-item">
+                    Errors are caught and displayed to the user as an alert message
+                </li>
+                <li class="list-group-item">
+                    Scrolling to the bounds of the spreadsheet automatically adds more rows/columns
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-body{
+        background: #DDE0E3;
+        border: black solid 1px;
+    }
+    ul>li{
+        background: #DDE0E3 !important;
+        border: none;
+    }
+</style>

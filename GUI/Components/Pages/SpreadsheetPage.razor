@@ -1,0 +1,227 @@
+﻿@namespace GUI.Client.Pages
+@page "/"
+@rendermode InteractiveServer
+@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Spreadsheet</PageTitle>
+
+<div class="input-group mb-3 font-monospace">
+    <div style="margin-right: 10px;">
+        <span class="input-group-text save-btn" type="button" @onclick="SaveFile">Save</span>
+    </div>
+    <div class="custom-file">
+        <InputFile class="form-control" type="file" id="formFile" OnChange="HandleFileChooser" />
+    </div>
+</div>
+
+@if (_showErr)
+{
+    <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+        @_errMsg
+        <button type="button" class="close  ms-auto" @onclick="DismissAlert">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+<div class="input-group mb-3 font-monospace">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@_currentCell</span>
+    </div>
+    <input type="text" class="form-control" placeholder="input content, formula starts with =" @ref="_contentEntryBox" @onchange="OnContentChanged" value="@_cellContentValue">
+</div>
+
+<div>
+    <div class="table-container bg-light rounded"  id="scroll-div" tabindex="0">
+        <div class="scrollable">
+            <table class="table table-secondary table-bordered border-light">
+                <thead>
+                    <tr class="fixed-header">
+                        <th scope="col">&nbsp;</th>
+                        @for (var col = 0; col < _cols; col++)
+                        {
+                            <th class="text-center" scope="col">@ColToAlphabet(col)</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody class="wrapper">
+                    <Virtualize Items="@RenderedRows" Context="row">
+                        <tr>
+                            <th scope="row" class="fixed-column">@(row + 1)</th>
+                            @for (var col = 0; col < _cols; col++)
+                            {
+                                var r = row;
+                                var c = col;
+
+                                <td @onclick="() => CellClicked(r, c)" class="@CellOnClickHighlighter(row, col) @(_isHoverable ? "hoverable" : "hover-disabled") rounded cellbox">
+                                    <p class="spreadcell overflow-auto"> @CellsValue.GetValueOrDefault((r, c), "")</p>
+                                </td>
+                            }
+                        </tr>
+                    </Virtualize>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .spreadcell {
+        width: 100px;
+        height: 20px;
+    }
+    .spreadcell:hover {
+        width: 100px;
+        height: 20px;
+    }
+
+    .hoverable:hover {
+        position: relative;
+        outline: cornflowerblue solid 2px;
+        z-index: 2;
+        transition: outline 0.1s ease-out;
+    }
+
+    .hover-disabled:hover{
+        box-shadow: none;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .fixed-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .fixed-column {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+    }
+
+    .scrollable {
+        white-space: nowrap; /* Ensures no line breaks within cells */
+        width: 1000px;
+        height: 80vh;
+    }
+
+    /*
+        customize css
+    */
+    .wrapper{
+        position: relative;
+    }
+    .active-cell {
+        position: relative;
+        outline: cornflowerblue solid 2px;
+        z-index: 2;
+        transition: outline 0.1s ease-in;
+    }
+    .active-cell:hover {
+        box-shadow: none;
+    }
+    .active-cell:focus {
+        box-shadow: none;
+    }
+    .save-btn:hover{
+        background: #DDE0E3;
+    }
+</style>
+
+<script type="text/javascript">
+/*
+ restore the scroll position to where it was after redirecting/refreshing
+*/
+function restoreScrollPosition() {
+    const target = document.getElementById("scroll-div");
+    if (!target) return;
+
+    const currentX = parseInt(sessionStorage.getItem("X") || "0", 10);
+    const currentY = parseInt(sessionStorage.getItem("Y") || "0", 10);
+
+    requestAnimationFrame(() => {
+        target.scrollTo({ left: currentX, top: currentY });
+    });
+
+    target.scrollLeft = currentX;
+    target.scrollTop = currentY;
+}
+
+/*
+add col/row automatically when user scrolls to the end of the spreadsheet
+*/
+function infiniteScroll(dotNetObj) {
+    const target = document.getElementById("scroll-div");
+
+    target.addEventListener('scroll', () => {
+        // store the current position for restoring later
+        sessionStorage.setItem("X", target.scrollLeft.toString());
+        sessionStorage.setItem("Y", target.scrollTop.toString());
+
+        // a tolerance for when spreadsheet gets larger
+        const margin = 3;
+        const isRightEnd = target.scrollLeft + target.clientWidth >= target.scrollWidth - margin;
+        const isBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - margin;
+
+        if (isRightEnd) {
+            dotNetObj.invokeMethodAsync('AddCol');
+        }
+        if (isBottom) {
+            dotNetObj.invokeMethodAsync('AddRow');
+        }
+    })
+}
+
+/*
+add alternative key listeners for better user experience
+*/
+window.addKeyPressListener = (dotNetObj) => {
+    // make sure there's only one listener exists when page reload
+    if (window.keyPressHandler) {
+        document.removeEventListener('keydown', window.keyPressHandler);
+    }
+
+    window.keyPressHandler = (event) => {
+        dotNetObj.invokeMethodAsync('DisableHover');
+        console.log(`Key pressed: ${event.key}`); // Debugging line
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+            event.preventDefault(); // Prevent arrow keys from scrolling
+        }
+        dotNetObj.invokeMethodAsync('HandleKeyPress', event.key);
+    };
+
+    document.addEventListener('keydown', window.keyPressHandler);
+
+    // when mouse moving, restore hovering affects
+    document.addEventListener('mousemove', () => {
+        dotNetObj.invokeMethodAsync('EnableHover');
+    });
+
+};
+
+/*
+creates a file for user to download
+*/
+function downloadFile(fileName, fileContent) {
+    // Create a blob with the file content
+    const blob = new Blob([fileContent], { type: "text/plain" });
+
+    // Create a link element
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = fileName;
+
+    // Append the anchor element to the body
+    document.body.appendChild(a);
+
+    // Click the link to trigger download
+    a.click();
+
+    // Remove the anchor element from the DOM
+    document.body.removeChild(a);
+}
+</script>

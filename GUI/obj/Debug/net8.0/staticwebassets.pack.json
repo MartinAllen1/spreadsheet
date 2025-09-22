@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/obj/Debug/net8.0/scopedcss/projectbundle/GUI.bundle.scp.css",
+      "PackagePath": "staticwebassets/GUI.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/bs5/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/bs5/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/bs5/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/bs5/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/bs5/bootstrap.min.css",
+      "PackagePath": "staticwebassets/bs5/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/bs5/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/bs5/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/GUI/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.GUI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.GUI.props",
+      "PackagePath": "build\\GUI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.GUI.props",
+      "PackagePath": "buildMultiTargeting\\GUI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.GUI.props",
+      "PackagePath": "buildTransitive\\GUI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
