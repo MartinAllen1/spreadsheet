@@ -1,0 +1,12 @@
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/bin/Debug/net8.0/Formula.deps.json
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/bin/Debug/net8.0/Formula.dll
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/bin/Debug/net8.0/Formula.pdb
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.GeneratedMSBuildEditorConfig.editorconfig
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.AssemblyInfoInputs.cache
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.AssemblyInfo.cs
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.csproj.CoreCompileInputs.cache
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.sourcelink.json
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.dll
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/refint/Formula.dll
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/Formula.pdb
+/Users/martinallen/RiderProjects/ps7-eevee_enjoyers/Spreadsheet/Formula/obj/Debug/net8.0/ref/Formula.dll
